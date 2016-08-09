@@ -28,7 +28,7 @@ int Queue::dequeue() {
 }
 
 unsigned int Queue::size() {
-    return capacity_ - front_ + rear_;
+    return (capacity_ - front_ + rear_) % capacity_;
 }
 
 bool Queue::isEmpty() {

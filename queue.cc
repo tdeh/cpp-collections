@@ -5,11 +5,11 @@
 Queue::Queue(unsigned int capacity) :
     capacity_(capacity) {
         front_ = rear_ = 0;
-        arr_[capacity + 1] = {};
+        arr_[capacity] = {};
     }
 
 void Queue::enqueue(int item) {
-    if (!isEmpty() && size() == capacity_) {
+    if (!isEmpty() && size() == capacity_ - 1) {
         throw std::overflow_error("Queue is full!");
     }
 

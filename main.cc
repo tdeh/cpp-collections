@@ -4,12 +4,15 @@
 #include "queue.h"
 
 int main() {
-    Queue q(5);
+    std::cout << "==== Start of Queue tests ===" << std::endl;
+
+    Queue q(6);
 
     std::cout << "Testing isEmpty()..." << std::endl;
     assert(q.isEmpty());
     q.enqueue(1);
     assert(!q.isEmpty());
+    q.clear();
 
     std::cout << "Testing wrap around..." << std::endl;
     for (int i = 0; i < 10; ++i) {
@@ -42,6 +45,8 @@ int main() {
         caught = true;
     }
     assert(caught);
+
+    std::cout << "==== End of Queue tests ===" << std::endl;
 
     return 0;
 }

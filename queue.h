@@ -13,10 +13,10 @@ class Queue {
         void clear();
 
     private:
-        int arr_[];
         unsigned int capacity_;
         unsigned int front_;
         unsigned int rear_;
+        int arr_[];
 };
 
 #endif // QUEUE_H

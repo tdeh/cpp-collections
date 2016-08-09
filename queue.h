@@ -6,7 +6,7 @@ class Queue {
         explicit Queue(size_t capacity);
         virtual ~Queue();
         void enqueue(int item);
-        void dequeue(int item);
+        int dequeue();
         size_t size();
         bool isEmpty();
         int front();

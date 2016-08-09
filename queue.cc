@@ -3,9 +3,8 @@
 #include <iostream>
 
 Queue::Queue(unsigned int capacity) :
-    capacity_(capacity) {
+    capacity_(capacity), vec_(capacity) {
         front_ = rear_ = 0;
-        arr_[capacity] = {};
     }
 
 void Queue::enqueue(int item) {
@@ -13,7 +12,7 @@ void Queue::enqueue(int item) {
         throw std::overflow_error("Queue is full!");
     }
 
-    arr_[rear_] = item;
+    vec_[rear_] = item;
     rear_ = (rear_ + 1) % capacity_;
 }
 
@@ -22,7 +21,7 @@ int Queue::dequeue() {
         throw std::underflow_error("Queue is empty!");
     }
 
-    int res = arr_[front_];
+    int res = vec_[front_];
     front_ = (front_ + 1) % capacity_;
     return res;
 }

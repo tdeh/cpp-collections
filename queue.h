@@ -1,5 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
+#include <vector>
 
 class Queue {
     public:
@@ -16,7 +17,7 @@ class Queue {
         unsigned int capacity_;
         unsigned int front_;
         unsigned int rear_;
-        int arr_[];
+        std::vector<int> vec_;
 };
 
 #endif // QUEUE_H

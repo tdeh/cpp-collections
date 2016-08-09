@@ -5,11 +5,11 @@ class Queue {
     public:
         explicit Queue(size_t size);
         ~Queue();
-        void Enqueue(int item);
-        void Dequeue(int item);
-        size_t Size();
-        bool IsEmpty();
-        int Front();
+        void enqueue(int item);
+        void dequeue(int item);
+        size_t size();
+        bool isEmpty();
+        int front();
 };
 
 #endif // QUEUE_H

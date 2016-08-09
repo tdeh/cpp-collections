@@ -1,5 +1,6 @@
 #include "queue.h"
 #include <stdexcept>
+#include <iostream>
 
 Queue::Queue(unsigned int capacity) :
     capacity_(capacity) {
@@ -8,12 +9,13 @@ Queue::Queue(unsigned int capacity) :
     }
 
 void Queue::enqueue(int item) {
-    if (size() == capacity_) {
+    if (!isEmpty() && size() == capacity_) {
         throw std::overflow_error("Queue is full!");
     }
 
     arr_[rear_] = item;
     rear_ = (rear_ + 1) % capacity_;
+
 }
 
 int Queue::dequeue() {
@@ -32,4 +34,8 @@ unsigned int Queue::size() {
 
 bool Queue::isEmpty() {
     return front_ == rear_;
+}
+
+void Queue::clear() {
+    front_ = rear_ = 0;
 }

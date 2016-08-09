@@ -10,6 +10,7 @@ class Queue {
         unsigned int size();
         bool isEmpty();
         int front();
+        void clear();
 
     private:
         int arr_[];

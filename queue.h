@@ -3,18 +3,17 @@
 
 class Queue {
     public:
-        explicit Queue(size_t capacity);
-        virtual ~Queue();
+        explicit Queue(unsigned int capacity);
+        virtual ~Queue() {};
         void enqueue(int item);
         int dequeue();
-        size_t size();
+        unsigned int size();
         bool isEmpty();
         int front();
 
     private:
-        size_t capacity_;
-        size_t size_;
         int arr_[];
+        unsigned int capacity_;
         unsigned int front_;
         unsigned int rear_;
 };

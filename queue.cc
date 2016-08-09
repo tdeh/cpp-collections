@@ -1,27 +1,35 @@
 #include "queue.h"
+#include <stdexcept>
 
-Queue::Queue(size_t size) : capacity_(capacity), arr[capacity] {
-    front_ = rear_ = size_ = 0;
-}
+Queue::Queue(unsigned int capacity) :
+    capacity_(capacity) {
+        front_ = rear_ = 0;
+        arr_[capacity + 1] = {};
+    }
 
 void Queue::enqueue(int item) {
-    if (isFull()) {
+    if (size() == capacity_) {
         throw std::overflow_error("Queue is full!");
     }
 
-    rear_ = (rear_ + 1) % capacity_;
-    ++size_;
     arr_[rear_] = item;
+    rear_ = (rear_ + 1) % capacity_;
 }
 
 int Queue::dequeue() {
-    if (size_ == 0) {
+    if (isEmpty()) {
         throw std::underflow_error("Queue is empty!");
     }
 
     int res = arr_[front_];
-    front_ = (front_ - 1) % capacity_;
-    --size_;
+    front_ = (front_ + 1) % capacity_;
+    return res;
+}
 
-    return res_;
+unsigned int Queue::size() {
+    return capacity_ - front_ + rear_;
+}
+
+bool Queue::isEmpty() {
+    return front_ == rear_;
 }

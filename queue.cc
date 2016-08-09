@@ -15,7 +15,6 @@ void Queue::enqueue(int item) {
 
     arr_[rear_] = item;
     rear_ = (rear_ + 1) % capacity_;
-
 }
 
 int Queue::dequeue() {

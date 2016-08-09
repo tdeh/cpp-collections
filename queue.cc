@@ -13,8 +13,6 @@ void Queue::enqueue(int item) {
         throw std::overflow_error("Queue is full!");
     }
 
-    std::cout << "Addr of capacity " << &capacity_ << std::endl;
-    std::cout << "Addr of 0th elem " << &(arr_[rear_]) << std::endl;
     arr_[rear_] = item;
     rear_ = (rear_ + 1) % capacity_;
 }

@@ -2,18 +2,6 @@
 #include <stdexcept>
 #include <stdio.h>
 
-AdjacencyList::~AdjacencyList() {
-    for (auto it = vertex_map_.begin(); it != vertex_map_.end(); ++it) {
-        delete it->first;
-    }
-}
-
-Vertex* AdjacencyList::AddVertex() {
-    Vertex* v = new Vertex;
-    AddVertex(v);
-    return v;
-}
-
 void AdjacencyList::AddVertex(Vertex* v) {
     // Check if vertex is already in the map
     if (vertex_map_.find(v) != vertex_map_.end()) {
@@ -41,8 +29,6 @@ void AdjacencyList::RemoveVertex(Vertex* v) {
     for (auto it = neighbors->begin(); it != neighbors->end(); ++it) {
         RemoveNeighbor(v, Neighbors(*it));
     }
-
-    delete v;
 }
 
 void AdjacencyList::RemoveEdge(Vertex* v, Vertex* w) {

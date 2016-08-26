@@ -9,9 +9,8 @@
 class AdjacencyList : public GraphImpl {
     public:
         AdjacencyList() {};
-        virtual ~AdjacencyList();
+        virtual ~AdjacencyList() {};
         virtual Vertex* GetVertex();
-        virtual Vertex* AddVertex();
         virtual void AddVertex(Vertex* v);
         virtual void AddEdge(Vertex* v, Vertex* w);
         virtual void RemoveVertex(Vertex* v);

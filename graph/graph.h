@@ -10,9 +10,7 @@ class Graph {
     public:
         Graph(GraphImpl* impl);
         virtual ~Graph() {};
-        // TODO(tdeh): verticies iterator, edge iterator
         Vertex* GetVertex();
-        Vertex* AddVertex();
         void AddVertex(Vertex* v);
         void AddEdge(Vertex* v, Vertex* w);
         void RemoveVertex(Vertex* v);

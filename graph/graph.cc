@@ -6,10 +6,6 @@ Vertex* Graph::GetVertex() {
     return impl_->GetVertex();
 }
 
-Vertex* Graph::AddVertex() {
-    return impl_->AddVertex();
-}
-
 void Graph::AddVertex(Vertex* v) {
     impl_->AddVertex(v);
 }

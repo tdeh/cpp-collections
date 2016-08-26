@@ -8,7 +8,6 @@ class GraphImpl {
     public:
         virtual ~GraphImpl() {};
         virtual Vertex* GetVertex()=0;
-        virtual Vertex* AddVertex()=0;
         virtual void AddVertex(Vertex* v)=0;
         virtual void AddEdge(Vertex* v, Vertex* w)=0;
         virtual void RemoveVertex(Vertex* v)=0;

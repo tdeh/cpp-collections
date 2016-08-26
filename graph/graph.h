@@ -1,21 +1,27 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include <map>
 #include <verctor>
+#include "vertex.h"
+#include "graph_impl.h"
 
 class Graph {
     public:
-        Graph();
+        Graph(GraphImpl* impl);
         virtual ~Graph() {};
+        // TODO(tdeh): verticies iterator, edge iterator
+        Vertex* GetVertex();
+        Vertex* AddVertex();
+        void AddVertex(const Vertex* v);
+        void AddEdge(const Vertex* v, const Vertex* w);
+        void RemoveVertex(Vertex* v);
+        void RemoveEdge(const Vertex* v, const Vertex* w);
         unsigned int NumVerticies();
         unsigned int NumEdges();
-        // TODO(tdeh): verticies iterator, edge iterator
-        Vertex* AVortex();
-        void InsertEdge(Vertex* v, Vertex* w, int o);
+        size_t GetSize();
 
     private:
-        AdjancencyList adj_list_;
+        GraphImpl* impl_;
 }
 
 #endif // GRAPH_H

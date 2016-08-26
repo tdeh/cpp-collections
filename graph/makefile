@@ -7,7 +7,7 @@ LFLAGS = -Wall $(DEBUG)
 a.out : $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o a.out
 
-main.o : main.cc graph.h vertex.h
+main.o : main.cc graph.h adjacency_list.h vertex.h
 	$(CC) $(CFLAGS) main.cc
 
 graph.o : graph.h graph.cc vertex.h graph_impl.h

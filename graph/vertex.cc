@@ -1,14 +1,14 @@
 #include "vertex.h"
 
 template <class T>
-Vertex::Vertex(T value) : value_(value) {};
+Vertex<T>::Vertex(T value) : value_(value) {};
 
 template <class T>
-T Vertex::GetValue() {
+T Vertex<T>::GetValue() {
     return value_;
 }
 
 template <class T>
-void Vertex::SetValue(T value) {
+void Vertex<T>::SetValue(T value) {
     value_ = value;
 }

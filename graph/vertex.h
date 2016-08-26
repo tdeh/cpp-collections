@@ -14,6 +14,6 @@ class Vertex {
     private:
         T value_;
         std::vector<Vertex*>* neighbors_;
-}
+};
 
 #endif // VERTEX_H

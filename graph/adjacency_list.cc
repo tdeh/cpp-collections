@@ -1,27 +1,34 @@
 #include "adjacency_list.h"
 #include <stdexcept>
+#include <stdio.h>
 
-AdjancencyList();
+template <class T>
+AdjacencyList<T>::~AdjacencyList() {
+    for (auto it = vertex_map_.begin(); it != vertex_map_.end(); ++it) {
+        delete *it;
+    }
+}
 
-virtual ~AdjancencyList() {};
-
-Vertex* AddVertex() {
-    Vertex* v = new Vertex;
+template <class T>
+Vertex<T>* AdjacencyList<T>::AddVertex() {
+    Vertex<T>* v = new Vertex<T>;
     AddVertex(v);
     return v;
 }
 
-void AddVertex(const Vertex* v) {
+template <class T>
+void AdjacencyList<T>::AddVertex(const Vertex<T>* v) {
     // Check if vertex is already in the map
     if (vertex_map_.find(v) != vertex_map_.end()) {
         return;
     }
 
     // Initialize vector for vertex v
-    vertex_map_[v] = vector();
+    vertex_map_[v] = std::vector<Vertex<T>*>();
 }
 
-void AddEdge(const Vertex* v, const Vertex* w) {
+template <class T>
+void AdjacencyList<T>::AddEdge(const Vertex<T>* v, const Vertex<T>* w) {
     // Check if edge already exists
     if (Adjacent(v, w)) {
         return;
@@ -32,22 +39,25 @@ void AddEdge(const Vertex* v, const Vertex* w) {
     vertex_map_[w].push_back(v);
 }
 
-void RemoveVertex(Vertex* v) {
+template <class T>
+void AdjacencyList<T>::RemoveVertex(Vertex<T>* v) {
     // Iterate through neighbors, remove vertex from other vertecies neighbor list
-    std::vector<Vertex*>* neighbors = GetNeighbors(v);
-    for (auto it = neighbors->begin(), it != neighbors->end(); ++it) {
-        RemoveNeighbor(v, GetNeighbors(*it));
+    std::vector<Vertex<T>*>* neighbors = Neighbors(v);
+    for (auto it = neighbors->begin(); it != neighbors->end(); ++it) {
+        RemoveNeighbor(v, Neighbors(*it));
     }
 
     delete v;
 }
 
-void RemoveEdge(const Vertex* v, const Vertex* w) {
-    RemoveNeighbor(w, GetNeighbors(v));
-    RemoveNeighbor(v, GetNeighbors(w));
+template <class T>
+void AdjacencyList<T>::RemoveEdge(const Vertex<T>* v, const Vertex<T>* w) {
+    RemoveNeighbor(w, Neighbors(v));
+    RemoveNeighbor(v, Neighbors(w));
 }
 
-Vertex* AdjancencyList::GetVertex() {
+template <class T>
+Vertex<T>* AdjacencyList<T>::GetVertex() {
     // Throw an error if there are no vertecies
     if (vertex_map_.size() <= 0) {
         throw std::underflow_error("No vertecies exist!");
@@ -57,8 +67,9 @@ Vertex* AdjancencyList::GetVertex() {
     return *(vertex_map_.begin());
 }
 
-bool Adjacent(const Vertex* v, const Vertex* w) {
-    std::vector<Vertex*>* neighbors = GetNeighbors(v);
+template <class T>
+bool AdjacencyList<T>::Adjacent(const Vertex<T>* v, const Vertex<T>* w) {
+    std::vector<Vertex<T>*>* neighbors = Neighbors(v);
 
     if (FindVertex(w, neighbors) != neighbors->end()) {
         return true;
@@ -67,23 +78,27 @@ bool Adjacent(const Vertex* v, const Vertex* w) {
     }
 }
 
-size_t AdjancencyList::GetSize() {
+template <class T>
+size_t AdjacencyList<T>::GetSize() {
     return vertex_map_.size();
 }
 
-std::vector<Vertex*>* GetNeighbors(const Vertex* v) {
+template <class T>
+std::vector<Vertex<T>*>* AdjacencyList<T>::Neighbors(const Vertex<T>* v) {
     return &(vertex_map_.at(v));
 }
 
-void AdjancencyList::RemoveNeighbor(const Vertex* v, const std::vector<Vertex*>* neighbors) {
-    std::vector<Vertex*>::iterator it = FindVertex(v, neighbors);
+template <class T>
+void AdjacencyList<T>::RemoveNeighbor(const Vertex<T>* v, const std::vector<Vertex<T>*>* neighbors) {
+    typename std::vector<Vertex<T>*>::iterator it = FindVertex(v, neighbors);
     if (it != neighbors->end()) {
         neighbors->erase(it);
     }
 }
 
-std::vector<Vertex*>::iterator AdjancencyList::FindVertex(const Vertex* v, const std::vector<Vertex*>* neighbors) {
-    std::vector<Vertex*>::iterator it = neighbors->begin();
+template <class T>
+typename std::vector<Vertex<T>*>::iterator AdjacencyList<T>::FindVertex(const Vertex<T>* v, const std::vector<Vertex<T>*>* neighbors) {
+    typename std::vector<Vertex<T>*>::iterator it = neighbors->begin();
     for (; it != neighbors->end(); ++it) {
         if (*it == v) {
             break;

@@ -24,7 +24,7 @@ class Edge {
         Vertex* start_;
         Vertex* end_;
         bool directed_;
-}
+};
 
 
 #endif // EDGE_H

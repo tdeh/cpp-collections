@@ -10,10 +10,10 @@ a.out : $(OBJS)
 main.o : main.cc graph.h vertex.h
 	$(CC) $(CFLAGS) main.cc
 
-graph.o : graph.h graph.cc vertex.h adjacency_list.h
+graph.o : graph.h graph.cc vertex.h graph_impl.h
 	$(CC) $(CFLAGS) graph.cc
 
-adjacency_list.o : adjacency_list.h adjacency_list.cc vertex.h
+adjacency_list.o : adjacency_list.h adjacency_list.cc graph_impl.h vertex.h
 	$(CC) $(CFLAGS) adjacency_list.cc
 
 vertex.o : vertex.h vertex.cc

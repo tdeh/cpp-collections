@@ -1,14 +1,11 @@
 #include "vertex.h"
 
-template <class T>
-Vertex<T>::Vertex(T value) : value_(value) {};
+Vertex::Vertex(int value) : value_(value) {};
 
-template <class T>
-T Vertex<T>::GetValue() {
+int Vertex::GetValue() {
     return value_;
 }
 
-template <class T>
-void Vertex<T>::SetValue(T value) {
+void Vertex::SetValue(int value) {
     value_ = value;
 }

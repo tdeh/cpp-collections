@@ -4,19 +4,19 @@
 #include <stdio.h>
 #include "vertex.h"
 
-template <class T>
 class GraphImpl {
     public:
-        virtual ~GraphImpl()=0;
-        virtual Vertex<T>* GetVertex()=0;
-        virtual Vertex<T>* AddVertex()=0;
-        virtual void AddVertex(const Vertex<T>* v)=0;
-        virtual void AddEdge(const Vertex<T>* v, const Vertex<T>* w)=0;
-        virtual void RemoveVertex(Vertex<T>* v)=0;
-        virtual void RemoveEdge(const Vertex<T>* v, const Vertex<T>* w)=0;
-        virtual bool Adjacent(const Vertex<T>* v, const Vertex<T>* w)=0;
-        virtual std::vector<Vertex<T>*>* Neighbors(const Vertex<T>* v)=0;
+        virtual ~GraphImpl() {};
+        virtual Vertex* GetVertex()=0;
+        virtual Vertex* AddVertex()=0;
+        virtual void AddVertex(Vertex* v)=0;
+        virtual void AddEdge(Vertex* v, Vertex* w)=0;
+        virtual void RemoveVertex(Vertex* v)=0;
+        virtual void RemoveEdge(Vertex* v, Vertex* w)=0;
+        virtual bool Adjacent(Vertex* v, Vertex* w)=0;
+        virtual std::vector<Vertex*>* Neighbors(Vertex* v)=0;
         virtual size_t GetSize()=0;
+        virtual unsigned int NumVerticies()=0;
 };
 
 #endif // GRAPH_IMPL_H

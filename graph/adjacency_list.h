@@ -6,26 +6,26 @@
 #include "vertex.h"
 #include "graph_impl.h"
 
-template <class T>
-class AdjacencyList : public GraphImpl<T> {
+class AdjacencyList : public GraphImpl {
     public:
-        AdjacencyList();
+        AdjacencyList() {};
         virtual ~AdjacencyList();
-        virtual Vertex<T>* GetVertex();
-        virtual Vertex<T>* AddVertex();
-        virtual void AddVertex(const Vertex<T>* v);
-        virtual void AddEdge(const Vertex<T>* v, const Vertex<T>* w);
-        virtual void RemoveVertex(Vertex<T>* v);
-        virtual void RemoveEdge(const Vertex<T>* v, const Vertex<T>* w);
-        virtual bool Adjacent(const Vertex<T>* v, const Vertex<T>* w);
-        virtual std::vector<Vertex<T>*>* Neighbors(const Vertex<T>* v);
+        virtual Vertex* GetVertex();
+        virtual Vertex* AddVertex();
+        virtual void AddVertex(Vertex* v);
+        virtual void AddEdge(Vertex* v, Vertex* w);
+        virtual void RemoveVertex(Vertex* v);
+        virtual void RemoveEdge(Vertex* v, Vertex* w);
+        virtual bool Adjacent(Vertex* v, Vertex* w);
+        virtual std::vector<Vertex*>* Neighbors(Vertex* v);
         virtual size_t GetSize();
+        virtual unsigned int NumVerticies();
 
     private:
-        void RemoveNeighbor(const Vertex<T>* v, const std::vector<Vertex<T>*>* neighbors);
-        typename std::vector<Vertex<T>*>::iterator FindVertex(const Vertex<T>* v, const std::vector<Vertex<T>*>* neighbors);
+        void RemoveNeighbor(Vertex* v, std::vector<Vertex*>* neighbors);
+        std::vector<Vertex*>::iterator FindVertex(Vertex* v, std::vector<Vertex*>* neighbors);
 
-        std::map<Vertex<T>*, std::vector<Vertex<T>*>> vertex_map_;
+        std::map<Vertex*, std::vector<Vertex*>> vertex_map_;
 };
 
 #endif // ADJACENCY_LIST_H

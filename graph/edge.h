@@ -1,7 +1,7 @@
 #ifndef EDGE_H
 #define EDGE_H
 
-template <class T>
+
 class Edge {
     public:
         Edge(Vertex* start, Vertex* end);

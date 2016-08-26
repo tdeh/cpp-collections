@@ -3,16 +3,16 @@
 
 #include <vector>
 
-template <class T>
 class Vertex {
     public:
-        Vertex(T value);
+        Vertex() {};
+        Vertex(int value);
         virtual ~Vertex() {};
-        T GetValue();
-        void SetValue(T value);
+        int GetValue();
+        void SetValue(int value);
 
     private:
-        T value_;
+        int value_;
         std::vector<Vertex*>* neighbors_;
 };
 

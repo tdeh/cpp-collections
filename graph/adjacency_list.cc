@@ -2,33 +2,29 @@
 #include <stdexcept>
 #include <stdio.h>
 
-template <class T>
-AdjacencyList<T>::~AdjacencyList() {
+AdjacencyList::~AdjacencyList() {
     for (auto it = vertex_map_.begin(); it != vertex_map_.end(); ++it) {
-        delete *it;
+        delete it->first;
     }
 }
 
-template <class T>
-Vertex<T>* AdjacencyList<T>::AddVertex() {
-    Vertex<T>* v = new Vertex<T>;
+Vertex* AdjacencyList::AddVertex() {
+    Vertex* v = new Vertex;
     AddVertex(v);
     return v;
 }
 
-template <class T>
-void AdjacencyList<T>::AddVertex(const Vertex<T>* v) {
+void AdjacencyList::AddVertex(Vertex* v) {
     // Check if vertex is already in the map
     if (vertex_map_.find(v) != vertex_map_.end()) {
         return;
     }
 
     // Initialize vector for vertex v
-    vertex_map_[v] = std::vector<Vertex<T>*>();
+    vertex_map_[v] = std::vector<Vertex*>();
 }
 
-template <class T>
-void AdjacencyList<T>::AddEdge(const Vertex<T>* v, const Vertex<T>* w) {
+void AdjacencyList::AddEdge(Vertex* v, Vertex* w) {
     // Check if edge already exists
     if (Adjacent(v, w)) {
         return;
@@ -39,10 +35,9 @@ void AdjacencyList<T>::AddEdge(const Vertex<T>* v, const Vertex<T>* w) {
     vertex_map_[w].push_back(v);
 }
 
-template <class T>
-void AdjacencyList<T>::RemoveVertex(Vertex<T>* v) {
+void AdjacencyList::RemoveVertex(Vertex* v) {
     // Iterate through neighbors, remove vertex from other vertecies neighbor list
-    std::vector<Vertex<T>*>* neighbors = Neighbors(v);
+    std::vector<Vertex*>* neighbors = Neighbors(v);
     for (auto it = neighbors->begin(); it != neighbors->end(); ++it) {
         RemoveNeighbor(v, Neighbors(*it));
     }
@@ -50,26 +45,23 @@ void AdjacencyList<T>::RemoveVertex(Vertex<T>* v) {
     delete v;
 }
 
-template <class T>
-void AdjacencyList<T>::RemoveEdge(const Vertex<T>* v, const Vertex<T>* w) {
+void AdjacencyList::RemoveEdge(Vertex* v, Vertex* w) {
     RemoveNeighbor(w, Neighbors(v));
     RemoveNeighbor(v, Neighbors(w));
 }
 
-template <class T>
-Vertex<T>* AdjacencyList<T>::GetVertex() {
+Vertex* AdjacencyList::GetVertex() {
     // Throw an error if there are no vertecies
     if (vertex_map_.size() <= 0) {
         throw std::underflow_error("No vertecies exist!");
     }
 
     // Return an arbitrary vertex
-    return *(vertex_map_.begin());
+    return vertex_map_.begin()->first;
 }
 
-template <class T>
-bool AdjacencyList<T>::Adjacent(const Vertex<T>* v, const Vertex<T>* w) {
-    std::vector<Vertex<T>*>* neighbors = Neighbors(v);
+bool AdjacencyList::Adjacent(Vertex* v, Vertex* w) {
+    std::vector<Vertex*>* neighbors = Neighbors(v);
 
     if (FindVertex(w, neighbors) != neighbors->end()) {
         return true;
@@ -78,27 +70,27 @@ bool AdjacencyList<T>::Adjacent(const Vertex<T>* v, const Vertex<T>* w) {
     }
 }
 
-template <class T>
-size_t AdjacencyList<T>::GetSize() {
+size_t AdjacencyList::GetSize() {
     return vertex_map_.size();
 }
 
-template <class T>
-std::vector<Vertex<T>*>* AdjacencyList<T>::Neighbors(const Vertex<T>* v) {
+unsigned int AdjacencyList::NumVerticies() {
+    return vertex_map_.size();
+}
+
+std::vector<Vertex*>* AdjacencyList::Neighbors(Vertex* v) {
     return &(vertex_map_.at(v));
 }
 
-template <class T>
-void AdjacencyList<T>::RemoveNeighbor(const Vertex<T>* v, const std::vector<Vertex<T>*>* neighbors) {
-    typename std::vector<Vertex<T>*>::iterator it = FindVertex(v, neighbors);
+void AdjacencyList::RemoveNeighbor(Vertex* v, std::vector<Vertex*>* neighbors) {
+    std::vector<Vertex*>::iterator it = FindVertex(v, neighbors);
     if (it != neighbors->end()) {
         neighbors->erase(it);
     }
 }
 
-template <class T>
-typename std::vector<Vertex<T>*>::iterator AdjacencyList<T>::FindVertex(const Vertex<T>* v, const std::vector<Vertex<T>*>* neighbors) {
-    typename std::vector<Vertex<T>*>::iterator it = neighbors->begin();
+std::vector<Vertex*>::iterator AdjacencyList::FindVertex(Vertex* v, std::vector<Vertex*>* neighbors) {
+    std::vector<Vertex*>::iterator it = neighbors->begin();
     for (; it != neighbors->end(); ++it) {
         if (*it == v) {
             break;

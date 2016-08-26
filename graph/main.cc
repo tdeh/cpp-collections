@@ -6,8 +6,8 @@
 #include "adjacency_list.h"
 
 int main() {
-    GraphImpl<int>* impl = new AdjacencyList<int>;
-    Graph<int> graph(impl);
+    AdjacencyList impl;
+    Graph graph(&impl);
 
     return 0;
 }

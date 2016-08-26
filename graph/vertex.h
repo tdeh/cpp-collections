@@ -1,17 +1,19 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
+#include <vector>
+
 template <class T>
 class Vertex {
     public:
-        Vertex();
+        Vertex(T value);
         virtual ~Vertex() {};
-        T data() {
-            return data_;
-        }
+        T GetValue();
+        void SetValue(T value);
 
     private:
-        T data_;
+        T value_;
+        std::vector<Vertex*>* neighbors_;
 }
 
 #endif // VERTEX_H
